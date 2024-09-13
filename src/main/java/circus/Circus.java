@@ -1,12 +1,14 @@
 package circus;
 
-import circus.animal.Animal;
-import circus.animal.Duck;
-import circus.animal.Parrot;
-import circus.animal.Tiger;
+import circus.animal.*;
 import circus.stuff.Cannon;
 import circus.stuff.Equipment;
 import circus.stuff.Ladder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static circus.animal.Animal.animalNameComparator;
 
 public class Circus {
     private static Animal[] animals = {
@@ -41,8 +43,37 @@ public class Circus {
     }
 
     public static void main(String[] args) {
-        makeAnimalsTalk();
-        System.out.println("Total value of animals " + calculateAssetValue(animals));
-        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+        System.out.println("Number of animals in the array is " + animals.length);
+//        animals[3] = new Elephant("Eli");
+        ArrayList<Animal> animalArrayList = new ArrayList<>(Arrays.asList(animals));
+
+        printAllAnimals(animalArrayList);
+
+        System.out.println("Size of the animal arraylist: " + animalArrayList.size());
+
+        Elephant strongOne = new Elephant("Strong One");
+        animalArrayList.add(strongOne);
+
+        Duck andy = new Duck("Andy");
+        animalArrayList.add(andy);
+
+        System.out.println("Before sorting: ");
+        printAllAnimals(animalArrayList);
+        System.out.println("Size of the animal arraylist: " + animalArrayList.size());
+
+        System.out.println("Strong One is in position: " + animalArrayList.indexOf(strongOne) + 1);
+
+        System.out.println("After sorting: ");
+        animalArrayList.sort(animalNameComparator);
+        printAllAnimals(animalArrayList);
+//        makeAnimalsTalk();
+//        System.out.println("Total value of animals " + calculateAssetValue(animals));
+//        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+    }
+
+    private static void printAllAnimals(ArrayList<Animal> animalArrayList) {
+        for (Animal a : animalArrayList) {
+            System.out.println(a);
+        }
     }
 }
